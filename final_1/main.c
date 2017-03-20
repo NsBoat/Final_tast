@@ -194,6 +194,39 @@ node** pathSearch(table maze){
     return best_path;
 }
 
+void walkPath(node* current, node* next){
+    int dif_X, dif_Y;
+    
+    dif_X = (next -> x) - (current -> x);
+    dif_Y = (next -> y) - (current -> y);
+    
+    switch (dif_X) {
+        case 1:
+            //moveRight();
+            printf("Move Right\n");
+            break;
+        case -1:
+            //moveLeft();
+            printf("Move Left\n");
+        default:
+            break;
+    }
+    
+    switch (dif_Y) {
+        case 1:
+            //moveDown();
+            printf("Move Down\n");
+            break;
+        case -1:
+            //moveUp();
+            printf("Move Up\n");
+            break;
+        default:
+            break;
+    }
+    
+}
+
 int main(){                                    // Main function
     table maze = initialise();
     
@@ -216,8 +249,10 @@ int main(){                                    // Main function
     
     node** best_path = pathSearch(maze);
      
-    for (int i = 0; i < step; i++){
-        printf("%d %d\n", best_path[i] -> x, best_path[i] -> y);
+    for (int i = 0; i < step - 1; i++){
+        node* current = best_path[i];
+        node* next = best_path[i + 1];
+        walkPath(current, next);
     }
     
     
