@@ -68,19 +68,6 @@ node*** newQueue(int path, int step){
     
     return a;
 }
- 
-
-/*
-node*** newQueus(int path int step){
-    node* a[path][step];
-    for (int i = 0; i< path; i++){
-        for (int j = 0; j< step; j++){
-            a[i][j] = NULL;
-        }
-    }
-    return a;
-}
-*/
 
 node** pathSearch(table maze){
     step = 1;
@@ -95,15 +82,11 @@ node** pathSearch(table maze){
     maze.t[0][tableSize - 1].isVisited = true;
     cpc = 1;
     
-    int count = 0;
-    
     while(isFound == false){
         ppc = cpc;
         cpc = 0;
         
-        count = 0;
-        
-        
+
         pre = newQueue(ppc, step);
         for (i = 0; i < ppc; i++){
             for (j = 0; j < step; j++){
@@ -125,17 +108,16 @@ node** pathSearch(table maze){
                 node* b = &maze.t[x - 1][y];
                 if (b -> isVisited == false){
                     for (j = 0; j < step; j++){
-                        temp[count][j] = pre[i][j];
+                        temp[cpc][j] = pre[i][j];
                     }
-                    temp[count][step] = b;
+                    temp[cpc][step] = b;
                     b -> isVisited = true;
                     cpc++;
-                    count++;
                 }
                 
                 if (b -> x == tableSize - 1 && b -> y == 0){
                     isFound = true;
-                    final_path = count;
+                    final_path = cpc;
                     break;
                 }
             }
@@ -144,17 +126,16 @@ node** pathSearch(table maze){
                 node* b = &maze.t[x + 1][y];
                 if (b -> isVisited == false){
                     for (j = 0; j < step; j++){
-                        temp[count][j] = pre[i][j];
+                        temp[cpc][j] = pre[i][j];
                     }
-                    temp[count][step] = b;
+                    temp[cpc][step] = b;
                     b -> isVisited = true;
                     cpc++;
-                    count++;
                 }
                 
                 if (b -> x == tableSize - 1 && b -> y == 0){
                     isFound = true;
-                    final_path = count;
+                    final_path = cpc;
                     break;
                 }
             }
@@ -163,17 +144,16 @@ node** pathSearch(table maze){
                 node* b = &maze.t[x][y - 1];
                 if (b -> isVisited == false){
                     for (j = 0; j < step; j++){
-                        temp[count][j] = pre[i][j];
+                        temp[cpc][j] = pre[i][j];
                     }
-                    temp[count][step] = b;
+                    temp[cpc][step] = b;
                     b -> isVisited = true;
                     cpc++;
-                    count++;
                 }
                 
                 if (b -> x == tableSize - 1 && b -> y == 0){
                     isFound = true;
-                    final_path = count;
+                    final_path = cpc;
                     break;
                 }
             }
@@ -182,29 +162,24 @@ node** pathSearch(table maze){
                 node* b = &maze.t[x][y + 1];
                 if (b -> isVisited == false){
                     for (j = 0; j < step; j++){
-                        temp[count][j] = pre[i][j];
+                        temp[cpc][j] = pre[i][j];
                     }
-                    temp[count][step] = b;
+                    temp[cpc][step] = b;
                     b -> isVisited = true;
                     cpc++;
-                    count++;
                 }
                 
                 if (b -> x == tableSize - 1 && b -> y == 0){
                     isFound = true;
-                    final_path = count;
+                    final_path = cpc;
                     break;
                 }
             }
-
-
-
         }
         
         free(pre);
         step++;
     }
-    
     
     node** best_path = (node** )malloc(step * sizeof(node*));
     if (final_path != -1){
@@ -241,7 +216,6 @@ int main(){                                    // Main function
     
     node** best_path = pathSearch(maze);
      
-    
     for (int i = 0; i < step; i++){
         printf("%d %d\n", best_path[i] -> x, best_path[i] -> y);
     }

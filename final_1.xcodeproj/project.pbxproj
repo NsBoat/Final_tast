@@ -246,6 +246,7 @@
 				18F0C2A11E78C5500021F560 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
